@@ -1,13 +1,15 @@
 
-//   modals
-  const gohomebutton = document.getElementById('go-home');
+const gohomebutton = document.getElementById('go-home');
 
   gohomebutton.addEventListener('click', function() {
     window.open( href="index.html");
-  });
-// Add to cart and price section
-let total=0
-let dtotal=0
+  })
+
+
+
+    let total=0
+    let discount=0
+    
  function handleclick(target){
    const selecteditems=document.getElementById('selected-items')
     const items=target.childNodes[3].childNodes[3].innerText;
@@ -17,58 +19,55 @@ let dtotal=0
     selecteditems.appendChild(p)
     const price=target.childNodes[3].childNodes[5].innerText.split(" ")[0]
     total=parseInt(total)+parseInt(price)
-   const firsttoal=document.getElementById('ist-price').innerText=total
-   const inputField=document.getElementById('coupon')
-   const applybtn=document.getElementById('btn-apply')
-   if(firsttoal>=200){
-      applybtn.removeAttribute('disabled')
-   }else{
-      applybtn.setAttribute('disabled','true')
-   }
- 
+   const firsttotal=document.getElementById('ist-price').innerText=total
+   const final=document.getElementById('f-price').innerText=total
 
-
-   document.getElementById('d-price').innerText=total*20/100
-   document.getElementById('f-price').innerText=total-total*20/100
-
+   const btnApply=document.getElementById('btn-apply')
+   btnApply.disabled = total < 200;
+   btnApply.addEventListener('click', discountApply);
+  
+   
+  
+   upDiscount();
    
  }
-//  const applyButton = document.getElementById('btn-apply');
-//  const inputField = document.getElementById('coupon');
-//  const totalPriceElement = document.getElementById('f-price'); // Assuming this is where you display the total price
-//  const discountPriceElement = document.getElementById('d-price'); // Assuming this is where you display the discount price
-//  const initialPriceElement = document.getElementById('ist-price'); // Assuming this is where you display the initial price
- 
-//  inputField.addEventListener('input', function() {
-//    const totalPrice = parseFloat(totalPriceElement.innerText);
 
-//    if (inputField.value === 'SELL200' && totalPrice >= 200) {
-//      applyButton.removeAttribute('disabled');
-//    } else {
-//      applyButton.setAttribute('disabled', 'true');
-//    }
-//  });
+ function discountApply() {
+  const couponInput = document.getElementById('coupon');
+  const ccode = couponInput.value;
+  if (ccode === 'SELL200') {
+    discount = Math.floor(total * 0.2); 
+    upDiscount();
+  }
+}
 
-//  applyButton.addEventListener('click', function() {
-//    const discountPrice = parseFloat((totalPriceElement.innerText * 0.2).toFixed(2)); // 20% discount
-//    const initialPrice = parseFloat(totalPriceElement.innerText);
+function upDiscount() {
+  const discountDisplay = document.getElementById('d-price');
+  discountDisplay.innerText = discount;
 
-//    discountPriceElement.innerText = discountPrice;
-//    initialPriceElement.innerText = initialPrice;
-
-//    const finalPrice = (initialPrice - discountPrice).toFixed(2);
-//    totalPriceElement.innerText = finalPrice;
-//  });
+  const finalTotalDisplay = document.getElementById('f-price');
+  finalTotalDisplay.innerText = total - discount;
+}
 
 
 
+// function  makePurchase() {
+  const btnPurchase = document.getElementById('btn-purse');
+  btnPurchase.addEventListener('click', function(){
+    if(total<=0)
+    btnPurchase.removeAttribute('disabled')
+    upDiscount();
 
+  
+  });
+  
+  
 
-
-
+  
   
 
 
- 
+
+
 
 

@@ -51,16 +51,8 @@ function upDiscount() {
 
 
 
-// function  makePurchase() {
-  const btnPurchase = document.getElementById('btn-purse');
-  btnPurchase.addEventListener('click', function(){
-    if(total<=0)
-    btnPurchase.removeAttribute('disabled')
-    upDiscount();
 
-  
-  });
-  
+ 
   
 
   
